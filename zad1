@@ -1,0 +1,14 @@
+Theorem zad1a : forall x y, 
+  orb (andb x (negb y)) (orb (andb (negb x) (negb y)) (andb (negb x) y)) 
+ = orb (negb y) (andb (negb x) y).
+
+Proof.
+  intros. destruct x; simpl; destruct y; simpl; trivial.
+Qed.
+
+Theorem zad1B : forall x y z, 
+  andb (andb (negb (andb (andb (negb x) y) z)) (negb (andb (andb x y) (negb z)))) (andb (andb x (negb y)) z) 
+ = andb (negb y) (andb x z).
+Proof.
+  intros; destruct x, y, z; simpl; trivial.
+Qed.
