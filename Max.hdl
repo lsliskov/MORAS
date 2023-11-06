@@ -5,5 +5,4 @@ CHIP Max {
     PARTS:
 	Less(a = a, b = b, out = less);
 	Mux16(a = a, b = b, sel = less, out = out);
-    
 }
