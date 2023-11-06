@@ -1,14 +1,53 @@
-Theorem zad1a : forall x y, 
-  orb (andb x (negb y)) (orb (andb (negb x) (negb y)) (andb (negb x) y)) 
- = orb (negb y) (andb (negb x) y).
+Set Implicit Arguments.
+Require Import List.
+Import ListNotations.
+(*Require Import Omega*)
 
+
+(* Bit *)
+
+Inductive B : Type :=
+  | O : B
+  | I : B.
+
+Definition And (x y : B) : B :=
+match x with
+  | O => O
+  | I => y
+end.
+
+Definition Or (x y : B) : B :=
+match x with
+  | O => y
+  | I => I
+end.
+
+Definition Not (x : B) : B :=
+match x with
+  | O => I
+  | I => O
+end.
+
+Definition Add (x y c : B) : B :=
+match x, y with
+  | O, O => c
+  | I, I => c
+  | _, _ => Not c
+end.
+
+Definition Rem (x y c : B) : B :=
+match x, y with
+  | O, O => O
+  | I, I => I
+  | _, _ => c
+end.
+Lemma zad1a (x y : B) : 
+    Or (And x (Not y)) (Or (And (Not x) (Not y)) (And (Not x) y)) = Or (Not y) (Not x).
 Proof.
-  intros. destruct x; simpl; destruct y; simpl; trivial.
+   destruct x, y; simpl; reflexivity.
 Qed.
 
-Theorem zad1B : forall x y z, 
-  andb (andb (negb (andb (andb (negb x) y) z)) (negb (andb (andb x y) (negb z)))) (andb (andb x (negb y)) z) 
- = andb (negb y) (andb x z).
+Lemma zad1b (x y z : B) : 
+   And (And (Not (And (Not x) (And y z))) (Not (And x (And y (Not z))))) (And x (And (Not y) z)) = And x (And (Not y) z).
 Proof.
-  intros; destruct x, y, z; simpl; trivial.
-Qed.
+  destruct x, y, z; simpl; trivial.
