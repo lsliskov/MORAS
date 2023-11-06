@@ -1,0 +1,12 @@
+CHIP Less {
+    IN a[16], b[16];
+    OUT out;
+
+    PARTS:
+        // Compare each bit from MSB to LSB
+        Or16(a = a, b = b, out = or_result);
+        
+        // The result is true if any OR condition is true
+        Not16(in = or_result, out = not_or_result);
+        Or16(a = not_or_result, b = false, out = out);
+}
