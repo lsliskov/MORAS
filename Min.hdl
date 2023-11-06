@@ -5,5 +5,4 @@ CHIP Min {
     PARTS:
 	Less(a = a, b = b, out = less);
 	Mux16(a = b, b = a, sel = less, out = out);
-    
 }
